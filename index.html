@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>CRUDS Project</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CRUDS</h1>
+            <p>Product Mangement System</p>
+        </div><!-- ./header -->
+
+        <div class="productData">
+            <input type="text" id="titleInput" placeholder="Product Name">
+            <div class="prices">
+                <input onkeyup="getTotal()" type="number" id="priceInput" placeholder="Price">
+                <input onkeyup="getTotal()" type="number" id="taxesInput" placeholder="Taxes">
+                <input onkeyup="getTotal()" type="number" id="adsInput" placeholder="ADS">
+                <input onkeyup="getTotal()" type="number" id="discountInput" placeholder="Discount">
+                <span id="totalSpan"></span>
+            </div><!-- ./prices -->
+            <input type="number" id="countInput" placeholder="Count">
+            <input type="text" id="categoryInput" placeholder="Category">
+            <button id="submitButton">Create</button>
+        </div><!-- ./inputs -->
+
+        <div class="outputs">
+            <div class="searchContainer">
+                <input onkeyup="searchProduct(this.value)" type="text" id="searchInput" placeholder="Search">
+                <div class="btnSearch">
+                    <button onclick="getSearchMood(this.id)" id="searchByTitle">Search by title</button>
+                    <button onclick="getSearchMood(this.id)" id="searchByCategory">Search by Category</button>
+                </div>
+
+                <div id="deleteAllDiv">
+
+                </div>
+
+                <!-- Table  -->
+                <table class="">
+                    <!-- Table Head  -->
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>title</th>
+                            <th>Price</th>
+                            <th>taxes</th>
+                            <th>ads</th>
+                            <th>discount</th>
+                            <th>total</th>
+                            <th>category</th>
+                            <th>update</th>
+                            <th>delete</th>
+                        </tr>
+                    </thead>
+                    <!-- Table Body  -->
+                    <tbody id="tableBody">
+                        <tr>
+                            <td>dummy</td>
+                            <td>dummy</td>
+                            <td>dummy</td>
+                            <td>dummy</td>
+                            <td>dummy</td>
+                            <td>dummy</td>
+                            <td>dummy</td>
+                            <td>dummy</td>
+                            <td>
+                                <button id="updateButton">update</button>
+                            </td>
+                            <td>
+                                <button id="deleteButton">delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- ./outputs -->
+    </div><!-- ./container -->
+
+    <script src="main.js"></script>
+</body>
+
+</html>

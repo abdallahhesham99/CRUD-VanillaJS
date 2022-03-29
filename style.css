@@ -1,0 +1,124 @@
+* {
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+body {
+  background-color: #171717;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+}
+input {
+  background-color: #444444;
+  width: 100%;
+  height: 25px;
+  border-radius: 4px;
+  font-size: 18px;
+  margin: 10px 5px;
+  padding: 6px;
+  border: 0;
+  color: #fff;
+  transition: 200ms ease transform;
+}
+input:focus {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 16px 0px rgba(218, 0, 55, 0.14);
+  -webkit-box-shadow: 0px 0px 16px 0px rgba(218, 0, 55, 0.14);
+  -moz-box-shadow: 0px 0px 16px 0px rgba(218, 0, 55, 0.14);
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+table {
+  width: 100%;
+  text-align: center;
+}
+table tr {
+  text-transform: uppercase;
+}
+table th,
+table td {
+  padding: 8px;
+}
+table button {
+  width: auto;
+  text-transform: capitalize;
+}
+/* ====================Button Styles==================================================== */
+button {
+  font-size: 1.1rem;
+  cursor: pointer;
+  width: 25%;
+  border: none;
+  border-radius: 4px;
+  background-color: #da0037;
+  color: #ededed;
+  font-weight: bold;
+  padding: 8px;
+  transition: 300ms ease background-color;
+  text-transform: capitalize;
+}
+button:hover {
+  background-color: #b1002c;
+}
+/* ================================================================================= */
+/* ================================================================================= */
+.container {
+  width: 80%;
+  margin: 40px auto;
+}
+/* ================================================================================= */
+/* =====================Header Style=============================================== */
+.header {
+  margin: 20px 0;
+  text-align: center;
+}
+.header h1 {
+  margin-bottom: 10px;
+}
+/* ================Price/Taxes/Ads/Discount Styles========================= */
+.prices {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.prices input {
+  width: 20%;
+}
+.prices #totalSpan {
+  background-color: #6c757d;
+  border-radius: 4px;
+  padding: 6px 2px;
+
+  height: 25px;
+  line-height: 25px;
+}
+.prices #totalSpan::before {
+  content: "Total: ";
+}
+/* ============Search Part Styles======================================= */
+.outputs {
+  margin: 15px 0;
+}
+.btnSearch {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.btnSearch button {
+  width: 40%;
+}
+/* ============================================== */
+#deleteAllDiv button {
+  width: 100%;
+  margin: 15px 0;
+  text-transform: capitalize;
+}
