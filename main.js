@@ -12,6 +12,8 @@ let searchInput = document.getElementById("searchInput");
 let submitButton = document.getElementById("submitButton");
 let clearButton = document.getElementById("clearButton");
 let deleteAllDiv = document.getElementById("deleteAllDiv");
+let tableBody = document.getElementById("tableBody");
+let noDataDiv = document.querySelector(".noDataDiv");
 
 // Function => getTotal Price of Product
 function getTotal() {
@@ -92,6 +94,7 @@ function displayProduct(arr) {
   let dataTableRow = ``;
   for (let i = 0; i < arr.length; i++) {
     dataTableRow += `
+  
       <tr>
         <td>${i + 1}</td>
         <td>${arr[i].title}</td>
@@ -106,18 +109,40 @@ function displayProduct(arr) {
             <button id="updateButton">update</button>
         </td>
         <td>
-            <button id="deleteButton">delete</button>
+            <button onclick="deleteProduct(${i})" id="deleteButton">delete</button>
         </td>
       </tr>`;
   }
-  document.getElementById("tableBody").innerHTML = dataTableRow;
+  tableBody.innerHTML = dataTableRow;
+  if (arr.length > 0) {
+    deleteAllDiv.innerHTML = `
+      <button onclick="deleteAllProducts()">
+        delete all (${arr.length})
+      </button>`;
+    noDataDiv.style.display = "none";
+  } else {
+    deleteAllDiv.innerHTML = "";
+    noDataDiv.style.display = "block";
+  }
 }
 displayProduct(productsData);
 // *=============================================================
 // Function => Delete Product
+function deleteProduct(index) {
+  productsData.splice(index, 1);
 
+  localStorage.setItem("productsData", JSON.stringify(productsData));
+
+  displayProduct(productsData);
+}
 // Function => Delete All Products
+function deleteAllProducts() {
+  productsData.splice(0);
 
+  localStorage.clear();
+
+  displayProduct(productsData);
+}
 //* =============================================================
 
 // *=============================================================
