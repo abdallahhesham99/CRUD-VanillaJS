@@ -14,7 +14,11 @@ let clearButton = document.getElementById("clearButton");
 let deleteAllDiv = document.getElementById("deleteAllDiv");
 let tableBody = document.getElementById("tableBody");
 let noDataDiv = document.querySelector(".noDataDiv");
-
+// ========================================================================
+let projectMood = "create";
+//this variable to catch value in function to use it in other function
+let tmp;
+// ========================================================================
 // Function => getTotal Price of Product
 function getTotal() {
   if (priceInput.value != "") {
@@ -57,7 +61,16 @@ function createProduct() {
     category: categoryInput.value.toLowerCase(),
   };
   //push product in array
-  productsData.push(productObj);
+  if (projectMood == "create") {
+    productsData.push(productObj);
+  } else {
+    console.log(productsData[tmp]);
+    productsData[tmp] = productObj;
+    projectMood = "create";
+    submitButton.innerHTML = "create";
+    submitButton.style.backgroundColor = "#b64fc8";
+    submitButton.style.color = "#fff";
+  }
 
   //save in localstorage
   localStorage.setItem("productsData", JSON.stringify(productsData));
@@ -85,6 +98,12 @@ function clearData() {
 
   //to make styles on totalSpan
   getTotal();
+
+  //when user click on update then click on clear
+  projectMood = "create";
+  submitButton.innerHTML = "create";
+  submitButton.style.backgroundColor = "#b64fc8";
+  submitButton.style.color = "#fff";
 }
 clearButton.addEventListener("click", clearData);
 
@@ -106,7 +125,7 @@ function displayProduct(arr) {
         <td>${arr[i].count}</td>
         <td>${arr[i].category}</td>
         <td>
-            <button id="updateButton">update</button>
+            <button onclick="updateProduct(${i})" id="updateButton">update</button>
         </td>
         <td>
             <button onclick="deleteProduct(${i})" id="deleteButton">delete</button>
@@ -114,6 +133,9 @@ function displayProduct(arr) {
       </tr>`;
   }
   tableBody.innerHTML = dataTableRow;
+
+  //if there data in array make deleteAll Button and hide No data div
+  //else remove delete all button and make No data div Visible
   if (arr.length > 0) {
     deleteAllDiv.innerHTML = `
       <button onclick="deleteAllProducts()">
@@ -147,7 +169,29 @@ function deleteAllProducts() {
 
 // *=============================================================
 // Function => Update Product
+function updateProduct(index) {
+  projectMood = "update";
+  tmp = index;
+  titleInput.value = productsData[index].title;
+  priceInput.value = productsData[index].price;
+  taxesInput.value = productsData[index].taxes;
+  adsInput.value = productsData[index].ads;
+  discountInput.value = productsData[index].discount;
+  getTotal();
+  countInput.value = productsData[index].count;
+  categoryInput.value = productsData[index].category;
 
+  //some styles when click on update button
+  submitButton.innerHTML = "update";
+  submitButton.style.backgroundColor = "#E0A800";
+  submitButton.style.color = "#000";
+
+  //smooth scroll to top when click on update button
+  scroll({
+    top: 0,
+    behavior: "smooth",
+  });
+}
 // *=============================================================
 // Function => Search Mood
 
