@@ -64,7 +64,6 @@ function createProduct() {
   if (projectMood == "create") {
     productsData.push(productObj);
   } else {
-    console.log(productsData[tmp]);
     productsData[tmp] = productObj;
     projectMood = "create";
     submitButton.innerHTML = "create";
