@@ -75,6 +75,8 @@ function clearData() {
   totalSpan.innerHTML = "";
   countInput.value = "";
   categoryInput.value = "";
+  //to make styles on totalSpan
+  getTotal();
 }
 clearButton.addEventListener("click", clearData);
 
