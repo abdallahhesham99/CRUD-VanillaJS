@@ -34,7 +34,7 @@ function getTotal() {
 //empty variable for contain all products data
 let productsData;
 
-//if there data in localstorage named productsdata set it in productData variable
+//if there data in localstorage named productsdata set it in productsData variable
 //else make empty array
 if (localStorage.getItem("productsData")) {
   productsData = JSON.parse(localStorage.getItem("productsData"));
@@ -54,12 +54,17 @@ function createProduct() {
     count: countInput.value,
     category: categoryInput.value.toLowerCase(),
   };
+  //push product in array
   productsData.push(productObj);
 
+  //save in localstorage
   localStorage.setItem("productsData", JSON.stringify(productsData));
 
-  console.log(productsData);
+  //call clear data in input function
   clearData();
+
+  //call displayProduct function to display new product after create
+  displayProduct(productsData);
 }
 submitButton.addEventListener("click", createProduct);
 // *=============================================================
@@ -75,6 +80,7 @@ function clearData() {
   totalSpan.innerHTML = "";
   countInput.value = "";
   categoryInput.value = "";
+
   //to make styles on totalSpan
   getTotal();
 }
@@ -82,7 +88,31 @@ clearButton.addEventListener("click", clearData);
 
 //* =============================================================
 // Function => Read Products
-
+function displayProduct(arr) {
+  let dataTableRow = ``;
+  for (let i = 0; i < arr.length; i++) {
+    dataTableRow += `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${arr[i].title}</td>
+        <td>${arr[i].price}</td>
+        <td>${arr[i].taxes}</td>
+        <td>${arr[i].ads}</td>
+        <td>${arr[i].discount}</td>
+        <td>${arr[i].total}</td>
+        <td>${arr[i].count}</td>
+        <td>${arr[i].category}</td>
+        <td>
+            <button id="updateButton">update</button>
+        </td>
+        <td>
+            <button id="deleteButton">delete</button>
+        </td>
+      </tr>`;
+  }
+  document.getElementById("tableBody").innerHTML = dataTableRow;
+}
+displayProduct(productsData);
 // *=============================================================
 // Function => Delete Product
 
