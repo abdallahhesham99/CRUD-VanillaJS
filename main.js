@@ -15,11 +15,13 @@ let deleteAllDiv = document.getElementById("deleteAllDiv");
 let tableBody = document.getElementById("tableBody");
 let noDataDiv = document.querySelector(".noDataDiv");
 // ========================================================================
+
 let projectMood = "create";
 
 let searchMood = "title";
 //this variable to catch value in function to use it in other function
 let tmp;
+
 // ========================================================================
 // Function => getTotal Price of Product
 function getTotal() {
@@ -108,7 +110,7 @@ function clearData() {
 }
 clearButton.addEventListener("click", clearData);
 
-//* ==============================================Read Function=============================================================
+//* ==============================================Read Function=========================================================
 // Function => Read Products
 function displayProduct(arr) {
   let dataTableRow = ``;
@@ -217,14 +219,14 @@ function searchProduct(value) {
       if (productsData[i].title.includes(value.toLowerCase())) {
         wantedProduct.push(productsData[i]);
       } else {
-        //when productData[i] !== title value in input
+        //when productsData[i] !== title value in input
       }
       //when use search with category
     } else {
       if (productsData[i].category.includes(value.toLowerCase())) {
         wantedProduct.push(productsData[i]);
       } else {
-        //when productData[i] !== category value in input
+        //when productsData[i] !== category value in input
       }
     }
   }
@@ -237,7 +239,7 @@ function searchProduct(value) {
   } else {
     deleteAllDiv.innerHTML = `
       <button onclick="deleteAllProducts()">
-        Delete all (${productData.length})
+        Delete all (${productsData.length})
       </button>`;
   }
 }
