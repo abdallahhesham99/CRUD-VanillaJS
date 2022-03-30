@@ -229,19 +229,18 @@ function searchProduct(value) {
         //when productsData[i] !== category value in input
       }
     }
+    if (productsData[i].title != value) {
+      noDataDiv.innerHTML = `<h2>No data similar with ${value}</h2>`;
+    } else {
+      noDataDiv.innerHTML = `<h2>No data`;
+    }
+    if (productsData[i].category != value) {
+      noDataDiv.innerHTML = `<h2>No data similar with ${value}</h2>`;
+    } else {
+      noDataDiv.innerHTML = `<h2>No data</h2>`;
+    }
   }
   displayProduct(wantedProduct);
-
-  //if there anything in search input remove delete all button
-  //else return the button again
-  if (searchInput.value != "") {
-    deleteAllDiv.innerHTML = ``;
-  } else {
-    deleteAllDiv.innerHTML = `
-      <button onclick="deleteAllProducts()">
-        Delete all (${productsData.length})
-      </button>`;
-  }
 }
 
 // *==========================================================================================================
