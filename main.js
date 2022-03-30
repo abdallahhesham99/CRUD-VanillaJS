@@ -16,6 +16,8 @@ let tableBody = document.getElementById("tableBody");
 let noDataDiv = document.querySelector(".noDataDiv");
 // ========================================================================
 let projectMood = "create";
+
+let searchMood = "title";
 //this variable to catch value in function to use it in other function
 let tmp;
 // ========================================================================
@@ -112,7 +114,6 @@ function displayProduct(arr) {
   let dataTableRow = ``;
   for (let i = 0; i < arr.length; i++) {
     dataTableRow += `
-  
       <tr>
         <td>${i + 1}</td>
         <td>${arr[i].title}</td>
@@ -193,8 +194,50 @@ function updateProduct(index) {
 }
 // *=============================================================
 // Function => Search Mood
-
+function getSearchMood(elementId) {
+  if (elementId == "searchByTitle") {
+    searchMood = "title";
+  } else {
+    searchMood = "category";
+  }
+  searchInput.placeholder = `Search by ${searchMood}`;
+  searchInput.focus();
+  searchInput.value = "";
+  displayProduct(productsData);
+}
 // Function ===> Search Product
+function searchProduct(value) {
+  let wantedProduct = [];
+  for (let i = 0; i < productsData.length; i++) {
+    //if user search with title
+    if (searchMood == "title") {
+      if (productsData[i].title.includes(value.toLowerCase())) {
+        wantedProduct.push(productsData[i]);
+      } else {
+        //when productData[i] !== title value in input
+      }
+      //when use search with category
+    } else {
+      if (productsData[i].category.includes(value.toLowerCase())) {
+        wantedProduct.push(productsData[i]);
+      } else {
+        //when productData[i] !== category value in input
+      }
+    }
+  }
+  displayProduct(wantedProduct);
+
+  //if there anything in search input remove delete all button
+  //else return the button again
+  if (searchInput.value != "") {
+    deleteAllDiv.innerHTML = ``;
+  } else {
+    deleteAllDiv.innerHTML = `
+      <button onclick="deleteAllProducts()">
+        Delete all (${productData.length})
+      </button>`;
+  }
+}
 
 // *=============================================================
 //validation
