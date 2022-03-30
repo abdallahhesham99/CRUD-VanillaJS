@@ -37,7 +37,7 @@ function getTotal() {
     totalSpan.style.backgroundColor = "#6C757D";
   }
 }
-// *=============================================================
+// *==============================================Create func============================================================
 
 //empty variable for contain all products data
 let productsData;
@@ -49,6 +49,7 @@ if (localStorage.getItem("productsData")) {
 } else {
   productsData = [];
 }
+
 // Function => Create Product
 function createProduct() {
   //make product object
@@ -83,9 +84,8 @@ function createProduct() {
   displayProduct(productsData);
 }
 submitButton.addEventListener("click", createProduct);
-// *=============================================================
+// *==================================================Clear function======================================================
 
-//* =============================================================
 // Function => Clear Inputs
 function clearData() {
   titleInput.value = "";
@@ -108,7 +108,7 @@ function clearData() {
 }
 clearButton.addEventListener("click", clearData);
 
-//* =============================================================
+//* ==============================================Read Function=============================================================
 // Function => Read Products
 function displayProduct(arr) {
   let dataTableRow = ``;
@@ -148,26 +148,29 @@ function displayProduct(arr) {
   }
 }
 displayProduct(productsData);
-// *=============================================================
+// *=============================================Delete Functions====================================================
 // Function => Delete Product
 function deleteProduct(index) {
+  //delete selected index from array
   productsData.splice(index, 1);
 
+  //add new data in localstorage after deleting product
   localStorage.setItem("productsData", JSON.stringify(productsData));
 
   displayProduct(productsData);
 }
 // Function => Delete All Products
 function deleteAllProducts() {
+  //delete all data in array
   productsData.splice(0);
 
+  //remove localstorage data
   localStorage.clear();
 
   displayProduct(productsData);
 }
-//* =============================================================
+// *===============================================Update Func=============================================================
 
-// *=============================================================
 // Function => Update Product
 function updateProduct(index) {
   projectMood = "update";
@@ -192,7 +195,7 @@ function updateProduct(index) {
     behavior: "smooth",
   });
 }
-// *=============================================================
+// *==============================================Search Functions========================================================
 // Function => Search Mood
 function getSearchMood(elementId) {
   if (elementId == "searchByTitle") {
@@ -239,5 +242,4 @@ function searchProduct(value) {
   }
 }
 
-// *=============================================================
-//validation
+// *==========================================================================================================
