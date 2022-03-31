@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/17f2547a59.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <title>CRUDS Project</title>
 </head>
@@ -20,16 +21,40 @@
         </div><!-- ./header -->
 
         <div class="productData">
-            <input type="text" id="titleInput" placeholder="Product Name">
-            <div class="prices">
+            <div class="form-control">
+                <input type="text" id="titleInput" placeholder="Product Name">
+                <i class="fa-solid fa-circle-check"></i>
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <small>Error message</small>
+            </div>
+
+            <div class="form-control">
                 <input onkeyup="getTotal()" type="number" id="priceInput" placeholder="Price">
+                <i class="fa-solid fa-circle-check"></i>
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <small>Error message</small>
+            </div>
+
+            <div class="form-control prices">
                 <input onkeyup="getTotal()" type="number" id="taxesInput" placeholder="Taxes">
                 <input onkeyup="getTotal()" type="number" id="adsInput" placeholder="ADS">
                 <input onkeyup="getTotal()" type="number" id="discountInput" placeholder="Discount">
                 <span id="totalSpan"></span>
             </div><!-- ./prices -->
-            <input type="number" id="countInput" placeholder="Count">
-            <input type="text" id="categoryInput" placeholder="Category">
+            <div class="form-control">
+                <input type="number" id="countInput" placeholder="Count">
+                <i class="fa-solid fa-circle-check"></i>
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <small>Error message</small>
+
+            </div>
+            <div class="form-control">
+                <input type="text" id="categoryInput" placeholder="Category">
+                <i class="fa-solid fa-circle-check"></i>
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <small>Error message</small>
+            </div>
+
             <div class="form-btns">
                 <button id="submitButton">Create</button>
                 <button id="clearButton">Clear</button>
@@ -39,7 +64,10 @@
 
         <div class="outputs">
             <div class="searchContainer">
-                <input onkeyup="searchProduct(this.value)" type="text" id="searchInput" placeholder="Search">
+                <div class="form-control">
+                    <input onkeyup="searchProduct(this.value)" type="text" id="searchInput" placeholder="Search">
+
+                </div>
                 <div class="btnSearch">
                     <button onclick="getSearchMood(this.id)" id="searchByTitle">Search by title</button>
                     <button onclick="getSearchMood(this.id)" id="searchByCategory">Search by Category</button>

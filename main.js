@@ -54,16 +54,19 @@ if (localStorage.getItem("productsData")) {
 
 // Function => Create Product
 function createProduct() {
+  //checkInputs function for validate
+  checkInputs();
+
   //make product object
   let productObj = {
-    title: titleInput.value.toLowerCase(),
+    title: titleInput.value,
     price: priceInput.value,
     taxes: taxesInput.value,
     ads: adsInput.value,
     discount: discountInput.value,
     total: totalSpan.innerHTML,
     count: countInput.value,
-    category: categoryInput.value.toLowerCase(),
+    category: categoryInput.value,
   };
   //push product in array
   if (projectMood == "create") {
@@ -216,31 +219,97 @@ function searchProduct(value) {
   for (let i = 0; i < productsData.length; i++) {
     //if user search with title
     if (searchMood == "title") {
-      if (productsData[i].title.includes(value.toLowerCase())) {
+      if (productsData[i].title.toLowerCase().includes(value.toLowerCase())) {
         wantedProduct.push(productsData[i]);
       } else {
         //when productsData[i] !== title value in input
       }
       //when use search with category
     } else {
-      if (productsData[i].category.includes(value.toLowerCase())) {
+      if (
+        productsData[i].category.toLowerCase().includes(value.toLowerCase())
+      ) {
         wantedProduct.push(productsData[i]);
       } else {
         //when productsData[i] !== category value in input
       }
     }
-    if (productsData[i].title != value) {
-      noDataDiv.innerHTML = `<h2>No data similar with ${value}</h2>`;
+    //* ??????????????????????????????????
+    if (searchMood == "title") {
+      if (productsData[i].title != value) {
+        noDataDiv.innerHTML = `<h2>No data similar with ${value}</h2>`;
+      } else {
+        noDataDiv.innerHTML = `<h2>No data`;
+      }
     } else {
-      noDataDiv.innerHTML = `<h2>No data`;
+      if (productsData[i].category != value) {
+        noDataDiv.innerHTML = `<h2>No data similar with ${value}</h2>`;
+      } else {
+        noDataDiv.innerHTML = `<h2>No data</h2>`;
+      }
     }
-    if (productsData[i].category != value) {
-      noDataDiv.innerHTML = `<h2>No data similar with ${value}</h2>`;
-    } else {
-      noDataDiv.innerHTML = `<h2>No data</h2>`;
-    }
+    //* ??????????????????????????????????
   }
   displayProduct(wantedProduct);
 }
 
-// *==========================================================================================================
+// *===============================================Validation===========================================================
+//Function checkInputs values
+
+function checkInputs() {
+  const titleInputValue = titleInput.value.trim();
+  const priceInputValue = priceInput.value.trim();
+  const countInputValue = countInput.value.trim();
+  const categoryInputValue = categoryInput.value.trim();
+
+  //title
+  if (titleInputValue == "") {
+    //show error
+    //add error class
+    setErrorFor(titleInput, "Product name cannot be empty");
+  } else {
+    //add success class
+    setSuccessFor(titleInput);
+  }
+  //price
+  if (priceInputValue == "") {
+    //show error
+    //add error class
+    setErrorFor(priceInput, "Product price cannot be empty");
+  } else {
+    //add success class
+    setSuccessFor(priceInput);
+  }
+  //count
+  if (countInputValue == "") {
+    //show error
+    //add error class
+    setErrorFor(countInput, "Product count cannot be empty");
+  } else {
+    //add success class
+    setSuccessFor(countInput);
+  }
+  //categoryInput
+  if (categoryInputValue == "") {
+    //show error
+    //add error class
+    setErrorFor(categoryInput, "Product category cannot be empty");
+  } else {
+    //add success class
+    setSuccessFor(categoryInput);
+  }
+}
+
+function setErrorFor(input, message) {
+  let formControl = input.parentElement; //.form-control
+  let small = formControl.querySelector("small");
+  //add error message inside small tag
+  small.innerHTML = message;
+  //add error class to form control
+  formControl.className = "form-control error";
+}
+
+function setSuccessFor(input) {
+  let formControl = input.parentElement; //.form-control
+  formControl.className = "form-control success";
+}
