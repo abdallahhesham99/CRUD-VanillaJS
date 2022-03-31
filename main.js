@@ -14,6 +14,7 @@ let clearButton = document.getElementById("clearButton");
 let deleteAllDiv = document.getElementById("deleteAllDiv");
 let tableBody = document.getElementById("tableBody");
 let noDataDiv = document.querySelector(".noDataDiv");
+
 // ========================================================================
 
 let projectMood = "create";
@@ -21,7 +22,8 @@ let projectMood = "create";
 let searchMood = "title";
 //this variable to catch value in function to use it in other function
 let tmp;
-
+// =====================================
+submitButton.setAttribute("disabled", true);
 // ========================================================================
 // Function => getTotal Price of Product
 function getTotal() {
@@ -54,9 +56,6 @@ if (localStorage.getItem("productsData")) {
 
 // Function => Create Product
 function createProduct() {
-  //checkInputs function for validate
-  checkInputs();
-
   //make product object
   let productObj = {
     title: titleInput.value,
@@ -108,7 +107,9 @@ function clearData() {
   //when user click on update then click on clear
   projectMood = "create";
   submitButton.innerHTML = "create";
-  submitButton.style.backgroundColor = "#b64fc8";
+  submitButton.setAttribute("disabled", true);
+
+  submitButton.style.backgroundColor = "#c181cc";
   submitButton.style.color = "#fff";
 }
 clearButton.addEventListener("click", clearData);
@@ -256,60 +257,32 @@ function searchProduct(value) {
 // *===============================================Validation===========================================================
 //Function checkInputs values
 
-function checkInputs() {
-  const titleInputValue = titleInput.value.trim();
-  const priceInputValue = priceInput.value.trim();
-  const countInputValue = countInput.value.trim();
-  const categoryInputValue = categoryInput.value.trim();
+titleInput.addEventListener("keyup", function () {
+  let productNameRegex = /^(?!\s)(?!.*\s$)(?=.*[a-zA-Z])[a-zA-Z0-9 '~?!]{2,}$/;
 
-  //title
-  if (titleInputValue == "") {
-    //show error
-    //add error class
-    setErrorFor(titleInput, "Product name cannot be empty");
+  //.form-control
+  let formControl = titleInput.parentElement;
+  let smallErrorMsg = formControl.lastElementChild;
+  console.log(smallErrorMsg);
+  if (productNameRegex.test(titleInput.value)) {
+    // add class success to form-control
+    formControl.classList.add("success");
+    //remove class error from form-control to prevent conflict
+    formControl.classList.remove("error");
+    //make submit button disabled
+    submitButton.removeAttribute("disabled");
+    formControl.style.paddingBottom = "20px";
+    smallErrorMsg.innerHTML = ``;
   } else {
-    //add success class
-    setSuccessFor(titleInput);
+    submitButton.setAttribute("disabled", true);
+    formControl.classList.add("error");
+    formControl.classList.remove("success");
+    formControl.style.paddingBottom = "80px";
+    smallErrorMsg.innerHTML = `Product name must be:
+    <li>Don't start with space and don't end with space</li>
+    <li>Must start with character</li>
+    <li>Atleast one alpha or numeric character</li>
+    <li>Minmum 2 number or character</li>
+    `;
   }
-  //price
-  if (priceInputValue == "") {
-    //show error
-    //add error class
-    setErrorFor(priceInput, "Product price cannot be empty");
-  } else {
-    //add success class
-    setSuccessFor(priceInput);
-  }
-  //count
-  if (countInputValue == "") {
-    //show error
-    //add error class
-    setErrorFor(countInput, "Product count cannot be empty");
-  } else {
-    //add success class
-    setSuccessFor(countInput);
-  }
-  //categoryInput
-  if (categoryInputValue == "") {
-    //show error
-    //add error class
-    setErrorFor(categoryInput, "Product category cannot be empty");
-  } else {
-    //add success class
-    setSuccessFor(categoryInput);
-  }
-}
-
-function setErrorFor(input, message) {
-  let formControl = input.parentElement; //.form-control
-  let small = formControl.querySelector("small");
-  //add error message inside small tag
-  small.innerHTML = message;
-  //add error class to form control
-  formControl.className = "form-control error";
-}
-
-function setSuccessFor(input) {
-  let formControl = input.parentElement; //.form-control
-  formControl.className = "form-control success";
-}
+});

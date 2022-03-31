@@ -15,9 +15,7 @@ input {
   width: 100%;
   border-radius: 4px;
   font-size: 18px;
-  margin: 0 5px;
   padding: 10px;
-
   color: #fff;
   transition: 200ms ease box-shadow;
 }
@@ -54,6 +52,11 @@ button {
 }
 button:hover {
   background-color: #821a94;
+}
+button:disabled{
+  background-color: #c181cc;
+  cursor: no-drop;
+
 }
 /* ================================================================================= */
 /* ================================================================================= */
@@ -120,6 +123,7 @@ button:hover {
 .prices input,
 .prices #totalSpan {
   width: calc(100% / 4);
+  margin: 0 5px;
 }
 .prices #totalSpan {
   background-color: #6c757d;
