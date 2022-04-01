@@ -14,7 +14,6 @@ let clearButton = document.getElementById("clearButton");
 let deleteAllDiv = document.getElementById("deleteAllDiv");
 let tableBody = document.getElementById("tableBody");
 let noDataDiv = document.querySelector(".noDataDiv");
-
 // ========================================================================
 
 let projectMood = "create";
@@ -107,7 +106,7 @@ function clearData() {
   projectMood = "create";
   submitButton.innerHTML = "create";
 
-  submitButton.style.backgroundColor = "#c181cc";
+  submitButton.style.backgroundColor = "#b64fc8";
   submitButton.style.color = "#fff";
 }
 clearButton.addEventListener("click", clearData);
