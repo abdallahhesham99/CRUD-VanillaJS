@@ -22,8 +22,7 @@ let projectMood = "create";
 let searchMood = "title";
 //this variable to catch value in function to use it in other function
 let tmp;
-// =====================================
-submitButton.setAttribute("disabled", true);
+
 // ========================================================================
 // Function => getTotal Price of Product
 function getTotal() {
@@ -107,7 +106,6 @@ function clearData() {
   //when user click on update then click on clear
   projectMood = "create";
   submitButton.innerHTML = "create";
-  submitButton.setAttribute("disabled", true);
 
   submitButton.style.backgroundColor = "#c181cc";
   submitButton.style.color = "#fff";
@@ -257,32 +255,4 @@ function searchProduct(value) {
 // *===============================================Validation===========================================================
 //Function checkInputs values
 
-titleInput.addEventListener("keyup", function () {
-  let productNameRegex = /^(?!\s)(?!.*\s$)(?=.*[a-zA-Z])[a-zA-Z0-9 '~?!]{2,}$/;
-
-  //.form-control
-  let formControl = titleInput.parentElement;
-  let smallErrorMsg = formControl.lastElementChild;
-  console.log(smallErrorMsg);
-  if (productNameRegex.test(titleInput.value)) {
-    // add class success to form-control
-    formControl.classList.add("success");
-    //remove class error from form-control to prevent conflict
-    formControl.classList.remove("error");
-    //make submit button disabled
-    submitButton.removeAttribute("disabled");
-    formControl.style.paddingBottom = "20px";
-    smallErrorMsg.innerHTML = ``;
-  } else {
-    submitButton.setAttribute("disabled", true);
-    formControl.classList.add("error");
-    formControl.classList.remove("success");
-    formControl.style.paddingBottom = "80px";
-    smallErrorMsg.innerHTML = `Product name must be:
-    <li>Don't start with space and don't end with space</li>
-    <li>Must start with character</li>
-    <li>Atleast one alpha or numeric character</li>
-    <li>Minmum 2 number or character</li>
-    `;
-  }
-});
+titleInput.addEventListener("keyup", function () {});
