@@ -1,3 +1,4 @@
+let allInputs = document.querySelectorAll(".clr");
 let titleInput = document.getElementById("titleInput");
 let priceInput = document.getElementById("priceInput");
 let taxesInput = document.getElementById("taxesInput");
@@ -6,10 +7,15 @@ let discountInput = document.getElementById("discountInput");
 let totalSpan = document.getElementById("totalSpan");
 let countInput = document.getElementById("countInput");
 let categoryInput = document.getElementById("categoryInput");
-//
 let searchInput = document.getElementById("searchInput");
 //
+let titleInputAlert = document.getElementById("titleInputAlert");
+let priceInputAlert = document.getElementById("priceInputAlert");
+let countInputAlert = document.getElementById("countInputAlert");
+let categoryInputAlert = document.getElementById("categoryInputAlert");
+//
 let submitButton = document.getElementById("submitButton");
+
 let clearButton = document.getElementById("clearButton");
 let deleteAllDiv = document.getElementById("deleteAllDiv");
 let tableBody = document.getElementById("tableBody");
@@ -90,14 +96,10 @@ submitButton.addEventListener("click", createProduct);
 
 // Function => Clear Inputs
 function clearData() {
-  titleInput.value = "";
-  priceInput.value = "";
-  taxesInput.value = "";
-  adsInput.value = "";
-  discountInput.value = "";
+  for (let i = 0; i < allInputs.length; i++) {
+    allInputs[i].value = "";
+  }
   totalSpan.innerHTML = "";
-  countInput.value = "";
-  categoryInput.value = "";
 
   //to make styles on totalSpan
   getTotal();
@@ -253,5 +255,3 @@ function searchProduct(value) {
 
 // *===============================================Validation===========================================================
 //Function checkInputs values
-
-titleInput.addEventListener("keyup", function () {});
