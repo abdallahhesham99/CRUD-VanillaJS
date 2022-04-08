@@ -9,13 +9,9 @@ let countInput = document.getElementById("countInput");
 let categoryInput = document.getElementById("categoryInput");
 let searchInput = document.getElementById("searchInput");
 //
-let titleInputAlert = document.getElementById("titleInputAlert");
-let priceInputAlert = document.getElementById("priceInputAlert");
-let countInputAlert = document.getElementById("countInputAlert");
-let categoryInputAlert = document.getElementById("categoryInputAlert");
-//
 let submitButton = document.getElementById("submitButton");
-
+let btnAlert = document.getElementById("btnAlert");
+//
 let clearButton = document.getElementById("clearButton");
 let deleteAllDiv = document.getElementById("deleteAllDiv");
 let tableBody = document.getElementById("tableBody");
@@ -26,7 +22,7 @@ let projectMood = "create";
 
 let searchMood = "title";
 //this variable to catch value in function to use it in other function
-let tmp;
+let globalVar;
 
 // ========================================================================
 // Function => getTotal Price of Product
@@ -72,21 +68,33 @@ function createProduct() {
     category: categoryInput.value,
   };
   //push product in array
-  if (projectMood == "create") {
-    productsData.push(productObj);
+  if (
+    titleInput.value != "" &&
+    priceInput.value != "" &&
+    countInput.value != "" &&
+    categoryInput.value != ""
+  ) {
+    if (projectMood == "create") {
+      productsData.push(productObj);
+      btnAlert.classList.replace("d-block", "d-none");
+      //call clear data in input function
+      clearData();
+    } else {
+      productsData[globalVar] = productObj;
+      projectMood = "create";
+      submitButton.innerHTML = "create";
+      submitButton.style.backgroundColor = "#b64fc8";
+      submitButton.style.color = "#fff";
+      btnAlert.classList.replace("d-block", "d-none");
+      //call clear data in input function
+      clearData();
+    }
   } else {
-    productsData[tmp] = productObj;
-    projectMood = "create";
-    submitButton.innerHTML = "create";
-    submitButton.style.backgroundColor = "#b64fc8";
-    submitButton.style.color = "#fff";
+    btnAlert.classList.replace("d-none", "d-block");
   }
 
   //save in localstorage
   localStorage.setItem("productsData", JSON.stringify(productsData));
-
-  //call clear data in input function
-  clearData();
 
   //call displayProduct function to display new product after create
   displayProduct(productsData);
@@ -163,6 +171,8 @@ function deleteProduct(index) {
   localStorage.setItem("productsData", JSON.stringify(productsData));
 
   displayProduct(productsData);
+
+  noDataDiv.innerHTML = `<h2>No data<h2>`;
 }
 // Function => Delete All Products
 function deleteAllProducts() {
@@ -173,13 +183,15 @@ function deleteAllProducts() {
   localStorage.clear();
 
   displayProduct(productsData);
+
+  noDataDiv.innerHTML = `<h2>No data<h2>`;
 }
 // *===============================================Update Func=============================================================
 
 // Function => Update Product
 function updateProduct(index) {
   projectMood = "update";
-  tmp = index;
+  globalVar = index;
   titleInput.value = productsData[index].title;
   priceInput.value = productsData[index].price;
   taxesInput.value = productsData[index].taxes;
@@ -239,7 +251,7 @@ function searchProduct(value) {
       if (productsData[i].title != value) {
         noDataDiv.innerHTML = `<h2>No data similar with ${value}</h2>`;
       } else {
-        noDataDiv.innerHTML = `<h2>No data`;
+        noDataDiv.innerHTML = `<h2>No data<h2>`;
       }
     } else {
       if (productsData[i].category != value) {

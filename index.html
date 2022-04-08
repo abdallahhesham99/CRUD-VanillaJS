@@ -27,35 +27,35 @@
         <div class="productData w-75 mx-auto">
             <div class="my-3">
                 <input type="text" id="titleInput" placeholder="Product Name" class="form-control  clr">
-              
             </div>
 
             <div class="my-3">
                 <input onkeyup="getTotal()" type="number" id="priceInput" placeholder="Price" class="form-control clr">
-              
             </div>
 
             <div class="prices my-3">
                 <input onkeyup="getTotal()" type="number" id="taxesInput" placeholder="Taxes"
-                    class="me-3 form-control clr">
-                <input onkeyup="getTotal()" type="number" id="adsInput" placeholder="ADS" class="mx-3 form-control clr">
+                    class="me-3 form-control clr" value="0">
+                <input onkeyup="getTotal()" type="number" id="adsInput" placeholder="ADS" class="mx-3 form-control clr"
+                    value="0">
                 <input onkeyup="getTotal()" type="number" id="discountInput" placeholder="Discount"
-                    class="mx-3 form-control clr">
+                    class="mx-3 form-control clr" value="0">
                 <span class="ms-3" id="totalSpan"></span>
             </div><!-- ./prices -->
 
             <div class="my-3">
                 <input type="number" id="countInput" placeholder="Count" class="form-control clr">
-         
             </div>
             <div class="my-3">
                 <input type="text" id="categoryInput" placeholder="Category" class="form-control clr">
-            
             </div>
 
             <div class="form-btns">
                 <button id="submitButton">Create</button>
                 <button id="clearButton">Clear</button>
+                <div class="alert alert-danger my-2 d-none w-50 mx-auto text-center" id="btnAlert">
+                    <strong>Please fill product data!</strong>
+                </div>
             </div>
 
         </div><!-- ./inputs -->
@@ -70,6 +70,7 @@
                 <div class="btnSearch  w-75 mx-auto">
                     <button onclick="getSearchMood(this.id)" id="searchByTitle">Search by title</button>
                     <button onclick="getSearchMood(this.id)" id="searchByCategory">Search by Category</button>
+
                 </div>
 
                 <div id="deleteAllDiv">
