@@ -76,6 +76,7 @@ function createProduct() {
   ) {
     if (projectMood == "create") {
       productsData.push(productObj);
+      //
       btnAlert.classList.replace("d-block", "d-none");
       //call clear data in input function
       clearData();
@@ -85,6 +86,7 @@ function createProduct() {
       submitButton.innerHTML = "create";
       submitButton.style.backgroundColor = "#b64fc8";
       submitButton.style.color = "#fff";
+      //
       btnAlert.classList.replace("d-block", "d-none");
       //call clear data in input function
       clearData();
